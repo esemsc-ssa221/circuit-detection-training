@@ -72,7 +72,7 @@ def main():
         attentions, hidden_states = get_model_outputs(sentence)
 
         # Analyze circuits for a specific layer
-        layer_index = 8
+        layer_index = 1
         cluster_labels, reduced_activations = find_circuits(hidden_states, layer_index)
         print(f"Cluster labels for layer {layer_index}: {cluster_labels}\n")
 

@@ -8,3 +8,4 @@ captum
 
 # LM
 transformers
+circuitsvis
