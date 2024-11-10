@@ -1,6 +1,10 @@
+# CNN & LM
 torch
 torchvision
 scikit-learn
 matplotlib
 Pillow
 captum
+
+# LM
+transformers

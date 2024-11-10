@@ -5,10 +5,14 @@ from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
 from captum.attr import Saliency
+import os
 
 # Load a pre-trained model
 model = models.resnet18(weights=models.ResNet18_Weights.DEFAULT)
 model.eval()
+
+output_dir = "cnn_images"
+os.makedirs(output_dir, exist_ok=True) 
 
 # Image preprocessing
 preprocess = transforms.Compose([
@@ -34,7 +38,7 @@ model.layer4[1].register_forward_hook(get_activation('layer4_block2'))
 #model.layer4[1].register_forward_hook(get_activation('layer4_block2'))
 
 def load_image(image_path):
-    img = Image.open(image_path)
+    img = Image.open(image_path).convert("RGB")
     img_t = preprocess(img)
     batch_t = torch.unsqueeze(img_t, 0)
     return batch_t
@@ -51,9 +55,11 @@ def visualize_feature_maps(activations, layer_name):
         plt.axis('off')
     plt.suptitle(f"Feature Maps in {layer_name}")
     
-    # Save the feature maps figure
-    plt.savefig(f"{layer_name}_feature_maps.png")
+    # Save the feature maps figure to the output directory
+    filepath = os.path.join(output_dir, f"{layer_name}_feature_maps.png")
+    plt.savefig(filepath)
     plt.close()
+    print(f"Saved feature maps for {layer_name} to {filepath}")
 
 def saliency_map(image_tensor, target_class):
     # Ensure requires_grad is set for saliency map computation
@@ -63,16 +69,19 @@ def saliency_map(image_tensor, target_class):
     saliency_map = saliency.attribute(image_tensor, target=target_class)
     saliency_map = saliency_map.squeeze().cpu().numpy()
     
-    # Display and save the saliency map
+    # Display and save the saliency map in the output directory
     plt.imshow(saliency_map[0], cmap='hot')
     plt.title("Saliency Map")
     plt.axis('off')
-    plt.savefig("saliency_map.png")
+    
+    filepath = os.path.join(output_dir, "saliency_map.png")
+    plt.savefig(filepath)
     plt.close()
+    print(f"Saved saliency map to {filepath}")
 
 def main():
     # Load and process the image
-    image_path = 'images/bike.jpg'
+    image_path = 'images/face.jpg'
     image_tensor = load_image(image_path)
 
     # Run the model and capture activations

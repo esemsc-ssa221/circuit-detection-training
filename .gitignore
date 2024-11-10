@@ -1,6 +1,6 @@
 # Ignore generated feature map images and saliency maps
-*_feature_maps.png
-saliency_map.png
+cnn_images/*
+cluster_visualizations/*
 
 # Ignore any other temporary files or caches
 __pycache__/

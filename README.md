@@ -21,14 +21,16 @@ Add sample images to the images/ folder to test circuit detection on different i
 
 Run the script to see the activations, clustering results, and visualizations for circuits:
 
-    python circuit_detection.py
+    python cnn_circuits.py
+    python lm_circuits.py
 
 This will load the model, capture activations from specific layers, apply clustering, and visualize the identified circuits.
 
 
-## Example images by courtesy of unsplash:
-https://unsplash.com/photos/a-black-and-white-photo-of-a-bicycle-tQQqmMqKToM
-https://unsplash.com/photos/brown-tabby-cat-on-white-stairs-mJaD10XeD7w
-https://unsplash.com/photos/woman-in-white-crew-neck-shirt-smiling-IF9TK5Uy-KI
-https://unsplash.com/photos/brown-wooden-surface-5fIoyoKlz7A
-https://unsplash.com/photos/green-grass-on-mountain-under-white-cloudy-sky-Cd3Ek7rNXSk
+## Example images by courtesy of Pixabay:
+https://pixabay.com/photos/bicycle-bike-activity-cycle-789648/
+https://pixabay.com/vectors/bicycle-bike-cycling-transport-7876692/
+https://pixabay.com/photos/cat-kitten-pet-striped-young-1192026/
+https://pixabay.com/photos/woman-face-smile-lips-hairstyle-8592765/
+https://pixabay.com/photos/glencoe-scotland-nature-landscape-8299076/
+https://pixabay.com/photos/wood-boards-texture-wooden-brown-2045380/
