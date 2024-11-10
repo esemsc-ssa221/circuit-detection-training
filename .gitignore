@@ -1,0 +1,8 @@
+# Ignore generated feature map images and saliency maps
+*_feature_maps.png
+saliency_map.png
+
+# Ignore any other temporary files or caches
+__pycache__/
+*.pyc
+.DS_Store

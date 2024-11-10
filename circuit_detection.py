@@ -27,7 +27,11 @@ def get_activation(name):
     return hook
 
 # Register hook to capture activations from the last convolutional layer
+# Register hooks for multiple layers
+model.layer2[1].register_forward_hook(get_activation('layer2_block2'))
+model.layer3[1].register_forward_hook(get_activation('layer3_block2'))
 model.layer4[1].register_forward_hook(get_activation('layer4_block2'))
+#model.layer4[1].register_forward_hook(get_activation('layer4_block2'))
 
 def load_image(image_path):
     img = Image.open(image_path)
@@ -79,11 +83,13 @@ def main():
     target_class = output.argmax().item()
     print(f"Predicted Class: {target_class}")
 
-    # Visualize feature maps of the captured layer
-    visualize_feature_maps(activations, 'layer4_block2')
+    # Visualize and save feature maps for each layer in activations
+    for layer_name in activations:
+        visualize_feature_maps(activations, layer_name)
 
     # Generate a saliency map
     saliency_map(image_tensor, target_class)
+
 
 if __name__ == "__main__":
     main()
